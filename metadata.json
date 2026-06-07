@@ -1,0 +1,6 @@
+{
+  "name": "Thartheel",
+  "description": "A high-performance personal Quran habit tracker styled with a nocturnal developer-tool aesthetic, designed for focused recitation and memorization. Tracks streak progress, Khatm goals, and interactive Hifdh blur toggles.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

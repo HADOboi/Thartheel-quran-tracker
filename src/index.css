@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Geist:wght@100..950&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@100..800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Geist', "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: 'Amiri', serif;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-neon-green: #39ff14;
+  --color-neon-dim: #107100;
+  --color-dark-bg: #0a0a0a;
+  --color-dark-surface: #141414;
+  --color-dark-border: #262626;
+  --color-dark-muted: #525252;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-dark-bg);
+    color: #e5e2e1;
+    font-family: var(--font-sans);
+    overflow: hidden;
+  }
+
+  /* Custom scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #262626;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #39ff14;
+  }
+}
+
+.blurred-ayah {
+  filter: blur(8px);
+  transition: filter 0.30s ease;
+  user-select: none;
+}
+.blurred-ayah:hover {
+  filter: blur(4px);
+  cursor: pointer;
+}
+.reveal-active {
+  filter: blur(0px) !important;
+}
+
+/* Background grid styling */
+.grid-bg {
+  background-image: radial-gradient(#39ff14 1px, transparent 1px);
+  background-size: 24px 24px;
+}
