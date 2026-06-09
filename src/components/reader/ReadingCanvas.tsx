@@ -36,6 +36,17 @@ export default function ReadingCanvas() {
 
   const pageData: Page = activePage !== null ? getPage(activePage) : getPage(604);
 
+  // Group ayahs on this page by surah to allow clean section layout
+  const surahGroups: { surahId: number; ayahs: typeof pageData.ayahs }[] = [];
+  pageData.ayahs.forEach((ayah) => {
+    let lastGroup = surahGroups[surahGroups.length - 1];
+    if (!lastGroup || lastGroup.surahId !== ayah.surah_id) {
+      lastGroup = { surahId: ayah.surah_id, ayahs: [] };
+      surahGroups.push(lastGroup);
+    }
+    lastGroup.ayahs.push(ayah);
+  });
+
   // Set the first surah on page as default for audio streams
   const primarySurahId = pageData.surah_on_page[0]?.surah_id || 114;
   const surahNames = pageData.surah_on_page.map(s => s.name_english).join(' • ');
@@ -134,46 +145,64 @@ export default function ReadingCanvas() {
       <section className="flex-1 overflow-y-auto px-10 py-8 z-10 custom-scrollbar relative flex flex-col items-center">
         <div className="w-full max-w-[850px] space-y-3 bg-dark-bg/40 rounded-2xl relative p-4 border border-dark-border/40">
           
-          {/* Surah Title Banner cards at top of content if starting surah */}
-          {pageData.ayahs.length > 0 && pageData.ayahs[0].ayah_number === 1 && (
-            <div className="mb-8 flex flex-col items-center justify-center">
-              <div className="px-10 py-3 rounded-xl border border-neon-green/30 bg-dark-surface/80 flex flex-col items-center justify-center relative shadow-[0_0_15px_rgba(57,255,20,0.05)] max-w-sm">
-                <span className="text-[10px] font-mono tracking-[0.2em] uppercase font-bold text-neon-green mb-1 select-none">
-                  Surah Revealed
-                </span>
-                <span className="font-arabic font-extrabold text-3xl text-white">{pageData.ayahs[0].arabic}</span>
-                <p className="font-display font-semibold text-xs text-dark-muted mt-2 uppercase tracking-widest text-[#85967c]">
-                  {getSurah(pageData.ayahs[0].surah_id)?.name_transliteration}
-                </p>
-              </div>
-              
-              {/* Bismillah banner */}
-              <p className="text-3xl font-arabic text-white/90 text-center mt-12 pr-6 select-none select-none tracking-normal">
-                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-              </p>
-              <p className="font-sans text-[11px] text-dark-muted text-center italic font-medium mt-1 select-none">
-                In the name of Allah, the Entirely Merciful, the Especially Merciful.
-              </p>
-            </div>
-          )}
-
-          {/* Ayah Verse Lists */}
-          <div className="rounded-xl overflow-hidden border border-dark-border shadow-2xl">
-            {pageData.ayahs.map((ayah, index) => {
-              const isMem = isAyahMemorized(ayah.surah_id, ayah.ayah_number);
-              const isFocused = index === activeRowIdx;
+          {/* Grouped Ayah Verse Lists */}
+          <div className="w-full space-y-12">
+            {surahGroups.map((group) => {
+              const surahInfo = getSurah(group.surahId);
+              const startsHere = group.ayahs[0].ayah_number === 1;
 
               return (
-                <AyahRow
-                  key={`${ayah.surah_id}:${ayah.ayah_number}`}
-                  ayah={ayah}
-                  index={index}
-                  isFocused={isFocused}
-                  isHifdhMode={isHifdhView}
-                  isMemorized={isMem}
-                  onFocused={() => setActiveRowIdx(index)}
-                  onToggleMemorized={() => toggleAyahMemorized(ayah.surah_id, ayah.ayah_number)}
-                />
+                <div key={group.surahId} className="space-y-5 animate-fadeIn">
+                  {startsHere && (
+                    <div className="mb-6 flex flex-col items-center justify-center w-full select-none">
+                      <div className="w-full max-w-sm px-8 py-3.5 rounded-xl border border-neon-green/30 bg-dark-surface/80 flex flex-col items-center justify-center relative shadow-[0_0_15px_rgba(57,255,20,0.05)] text-center">
+                        <span className="text-[9px] font-mono tracking-[0.2em] uppercase font-bold text-neon-green/80 mb-1 select-none">
+                          SURAH {surahInfo?.revelation_type} • {surahInfo?.total_ayahs} AYAHS
+                        </span>
+                        <span className="font-arabic font-extrabold text-2xl text-white py-0.5">
+                          سُورَةُ {surahInfo?.name_arabic}
+                        </span>
+                        <p className="font-display font-semibold text-[11px] text-[#85967c] mt-1.5 uppercase tracking-widest leading-none">
+                          {surahInfo?.name_transliteration} ({surahInfo?.name_english})
+                        </p>
+                      </div>
+                      
+                      {group.surahId !== 9 && group.surahId !== 1 && (
+                        <div className="mt-8 mb-2 flex flex-col items-center">
+                          <p className="text-3xl font-arabic text-white/95 text-center pr-6 select-none tracking-normal">
+                            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+                          </p>
+                          <p className="font-sans text-[10px] text-dark-muted text-center italic font-medium mt-1 select-none">
+                            In the name of Allah, the Entirely Merciful, the Especially Merciful.
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  <div className="rounded-xl overflow-hidden border border-dark-border shadow-2xl bg-dark-bg/10">
+                    {group.ayahs.map((ayah) => {
+                      const indexOnPage = pageData.ayahs.findIndex(
+                        (a) => a.surah_id === ayah.surah_id && a.ayah_number === ayah.ayah_number
+                      );
+                      const isMem = isAyahMemorized(ayah.surah_id, ayah.ayah_number);
+                      const isFocused = indexOnPage === activeRowIdx;
+
+                      return (
+                        <AyahRow
+                          key={`${ayah.surah_id}:${ayah.ayah_number}`}
+                          ayah={ayah}
+                          index={indexOnPage}
+                          isFocused={isFocused}
+                          isHifdhMode={isHifdhView}
+                          isMemorized={isMem}
+                          onFocused={() => setActiveRowIdx(indexOnPage)}
+                          onToggleMemorized={() => toggleAyahMemorized(ayah.surah_id, ayah.ayah_number)}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
               );
             })}
           </div>

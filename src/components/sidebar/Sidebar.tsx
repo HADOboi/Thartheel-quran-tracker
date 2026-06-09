@@ -29,6 +29,34 @@ export default function Sidebar({ activeSection, setActiveSection }: SidebarProp
   // Let's calculate overall progress %
   const progressPercent = ((totalCompleted / 604) * 100).toFixed(1);
 
+  // Generate the last 7 days of the week to display progression
+  const getPastSevenDays = () => {
+    const days = [];
+    const dateLabels = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+    const completedHistory = useQuranStore.getState().quran_recite_tracker.completed_pages_history;
+
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date();
+      d.setDate(d.getDate() - i);
+      
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      const dateStr = `${year}-${month}-${day}`;
+      
+      const dayOfWeekIndex = d.getDay();
+      const label = dateLabels[dayOfWeekIndex];
+      
+      const isDone = completedHistory.some((h) => h.date === dateStr);
+      const isToday = i === 0;
+
+      days.push({ label, isDone, isToday, dateStr });
+    }
+    return days;
+  };
+
+  const pastSevenDays = getPastSevenDays();
+
   return (
     <aside className="w-[280px] bg-dark-surface border-r border-dark-border flex flex-col p-6 h-screen select-none shrink-0 overflow-y-auto">
       {/* Brand logo block */}
@@ -47,7 +75,7 @@ export default function Sidebar({ activeSection, setActiveSection }: SidebarProp
         </p>
       </div>
 
-      {/* Streak widget with explicit line-height and heights to prevent any numeric font cutoffs */}
+      {/* Streak widget with week progression */}
       <div className="mb-6 py-5 px-4 rounded-xl bg-dark-bg border border-dark-border flex flex-col items-center justify-center relative group shadow-[inset_0_0_20px_rgba(0,0,0,0.6)]">
         <div className="absolute top-2.5 right-2.5 flex space-x-0.5">
           <span className="w-1.5 h-1.5 rounded-full bg-neon-green animate-ping"></span>
@@ -60,9 +88,36 @@ export default function Sidebar({ activeSection, setActiveSection }: SidebarProp
             {streak}
           </span>
         </div>
-        <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#85967c] mt-2.5 select-none">
+        <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#85967c] mt-2 select-none">
           Day Streak
         </span>
+
+        {/* Minimal 7-day Week Progression */}
+        <div className="w-full mt-4 pt-4 border-t border-dark-border/40 flex items-center justify-between px-0.5">
+          {pastSevenDays.map((day, idx) => (
+            <div key={idx} className="flex flex-col items-center space-y-1">
+              <span className={`text-[8.5px] font-mono font-bold leading-none select-none ${
+                day.isToday ? 'text-neon-green' : 'text-dark-muted/80'
+              }`}>
+                {day.label}
+              </span>
+              <div 
+                className={`w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all duration-300 relative ${
+                  day.isDone
+                    ? 'bg-neon-green'
+                    : day.isToday
+                      ? 'border border-dashed border-neon-green/45 bg-neon-green/5'
+                      : 'bg-neutral-900 border border-dark-border/40'
+                }`}
+                title={`${day.dateStr} — ${day.isDone ? 'Completed' : 'No Reading'}`}
+              >
+                {day.isDone && (
+                  <CheckCircle2 className="w-2.5 h-2.5 text-black stroke-[3.5]" />
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Overall Progress widget */}

@@ -82,13 +82,13 @@ export const juz_index: JuzEntry[] = [
 export const surah_index: SurahEntry[] = [
   { surah_id: 114, name_arabic: "النَّاس", name_english: "An-Nas", name_transliteration: "An-Naas", revelation_type: "meccan", total_ayahs: 6, page_start: 604, page_end: 604, juz: 30 },
   { surah_id: 113, name_arabic: "الْفَلَق", name_english: "Al-Falaq", name_transliteration: "Al-Falaq", revelation_type: "meccan", total_ayahs: 5, page_start: 604, page_end: 604, juz: 30 },
-  { surah_id: 112, name_arabic: "الإِخْلَاص", name_english: "Al-Ikhlas", name_transliteration: "Al-Ikhlaas", revelation_type: "meccan", total_ayahs: 4, page_start: 603, page_end: 603, juz: 30 },
+  { surah_id: 112, name_arabic: "الإِخْلَاص", name_english: "Al-Ikhlas", name_transliteration: "Al-Ikhlaas", revelation_type: "meccan", total_ayahs: 4, page_start: 604, page_end: 604, juz: 30 },
   { surah_id: 111, name_arabic: "المَسَد", name_english: "Al-Masad", name_transliteration: "Al-Masad", revelation_type: "meccan", total_ayahs: 5, page_start: 603, page_end: 603, juz: 30 },
   { surah_id: 110, name_arabic: "النَّصْر", name_english: "An-Nasr", name_transliteration: "An-Nasr", revelation_type: "medinan", total_ayahs: 3, page_start: 603, page_end: 603, juz: 30 },
-  { surah_id: 109, name_arabic: "الكَافِرُون", name_english: "Al-Kafirun", name_transliteration: "Al-Kafiroon", revelation_type: "meccan", total_ayahs: 6, page_start: 602, page_end: 602, juz: 30 },
+  { surah_id: 109, name_arabic: "الكَافِرُون", name_english: "Al-Kafirun", name_transliteration: "Al-Kafiroon", revelation_type: "meccan", total_ayahs: 6, page_start: 603, page_end: 603, juz: 30 },
   { surah_id: 108, name_arabic: "الكَوْثَر", name_english: "Al-Kauthar", name_transliteration: "Al-Kauthar", revelation_type: "meccan", total_ayahs: 3, page_start: 602, page_end: 602, juz: 30 },
   { surah_id: 107, name_arabic: "المَاعُون", name_english: "Al-Ma'un", name_transliteration: "Al-Ma'oon", revelation_type: "meccan", total_ayahs: 7, page_start: 602, page_end: 602, juz: 30 },
-  { surah_id: 106, name_arabic: "قُرَيْش", name_english: "Quraish", name_transliteration: "Quraish", revelation_type: "meccan", total_ayahs: 4, page_start: 601, page_end: 601, juz: 30 },
+  { surah_id: 106, name_arabic: "قُرَيْش", name_english: "Quraish", name_transliteration: "Quraish", revelation_type: "meccan", total_ayahs: 4, page_start: 602, page_end: 602, juz: 30 },
   { surah_id: 105, name_arabic: "الفِيل", name_english: "Al-Fil", name_transliteration: "Al-Fil", revelation_type: "meccan", total_ayahs: 5, page_start: 601, page_end: 601, juz: 30 },
   { surah_id: 104, name_arabic: "الهُمَزَة", name_english: "Al-Humazah", name_transliteration: "Al-Humazah", revelation_type: "meccan", total_ayahs: 9, page_start: 601, page_end: 601, juz: 30 },
   { surah_id: 103, name_arabic: "العَصْر", name_english: "Al-Asr", name_transliteration: "Al-Asr", revelation_type: "meccan", total_ayahs: 3, page_start: 601, page_end: 601, juz: 30 },
@@ -202,10 +202,55 @@ const detailed_pages: Record<number, Page> = {
     page_number: 604,
     juz_number: 30,
     surah_on_page: [
-      { surah_id: 114, name_arabic: "النَّاس", name_english: "An-Nas", is_surah_start: true },
-      { surah_id: 113, name_arabic: "الْفَلَق", name_english: "Al-Falaq", is_surah_start: true }
+      { surah_id: 112, name_arabic: "الإِخْلَاص", name_english: "Al-Ikhlas", is_surah_start: true },
+      { surah_id: 113, name_arabic: "الْفَلَق", name_english: "Al-Falaq", is_surah_start: true },
+      { surah_id: 114, name_arabic: "النَّاس", name_english: "An-Nas", is_surah_start: true }
     ],
     ayahs: [
+      {
+        global_ayah_index: 6227,
+        surah_id: 112,
+        ayah_number: 1,
+        arabic: "قُلْ هُوَ اللَّهُ أَحَدٌ",
+        translation: "Say, \"He is Allah, [who is] One,",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6228,
+        surah_id: 112,
+        ayah_number: 2,
+        arabic: "اللَّهُ الصَّمَدُ",
+        translation: "Allah, the Eternal Refuge.",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6229,
+        surah_id: 112,
+        ayah_number: 3,
+        arabic: "لَمْ يَلِدْ وَلَمْ يُولَدْ",
+        translation: "He neither begets nor is born,",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6230,
+        surah_id: 112,
+        ayah_number: 4,
+        arabic: "وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ",
+        translation: "And there is none co-equal or comparable unto Him.\"",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
       {
         global_ayah_index: 6231,
         surah_id: 113,
@@ -333,264 +378,11 @@ const detailed_pages: Record<number, Page> = {
     page_number: 603,
     juz_number: 30,
     surah_on_page: [
-      { surah_id: 112, name_arabic: "الإِخْلَاص", name_english: "Al-Ikhlas", is_surah_start: true },
-      { surah_id: 111, name_arabic: "المَسَد", name_english: "Al-Masad", is_surah_start: true },
-      { surah_id: 110, name_arabic: "النَّصْر", name_english: "An-Nasr", is_surah_start: true }
-    ],
-    ayahs: [
-      {
-        global_ayah_index: 6220,
-        surah_id: 110,
-        ayah_number: 1,
-        arabic: "إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ",
-        translation: "When the victory of Allah has come and the conquest,",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
-      {
-        global_ayah_index: 6221,
-        surah_id: 110,
-        ayah_number: 2,
-        arabic: "وَرَأَيْتَ النَّاسَ يَدْخُلُونَ فِي دِينِ اللَّهِ أَفْوَاجًا",
-        translation: "And you see the people entering into the religion of Allah in multitudes,",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
-      {
-        global_ayah_index: 6222,
-        surah_id: 110,
-        ayah_number: 3,
-        arabic: "فَسَبِّحْ بِحَمْدِ رَبِّكَ وَاسْتَغْفِرْهُ ۚ إِنَّهُ كَانَ تَوَّابًا",
-        translation: "Then exalt [Him] with praise of your Lord and ask forgiveness of Him. Indeed, He is ever Accepting of repentance.",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
-      {
-        global_ayah_index: 6223,
-        surah_id: 111,
-        ayah_number: 1,
-        arabic: "تَبَّتْ يَدَا أَبِي لَهَبٍ وَتَبَّ",
-        translation: "May the hands of Abu Lahab be ruined, and ruined is he.",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
-      {
-        global_ayah_index: 6224,
-        surah_id: 111,
-        ayah_number: 2,
-        arabic: "مَا أَغْنَىٰ عَنْهُ مَالُهُ وَمَا كَسَبَ",
-        translation: "His wealth will not avail him or that which he gained.",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
-      {
-        global_ayah_index: 6225,
-        surah_id: 111,
-        ayah_number: 3,
-        arabic: "سَيَصْلَىٰ نَارًا ذَاتَ لَهَبٍ",
-        translation: "He will [enter to] burn in a Fire of [blazing] flame,",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
-      {
-        global_ayah_index: 6226,
-        surah_id: 111,
-        ayah_number: 4,
-        arabic: "وَامْرَأَتُهُ حَمَّالَةَ الْحَطَبِ",
-        translation: "And his wife [as well] - the carrier of firewood.",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
-      {
-        global_ayah_index: 6227,
-        surah_id: 111,
-        ayah_number: 5,
-        arabic: "فِي جِيدِهَا حَبْلٌ مِّن مَّسَدٍ",
-        translation: "Around her neck is a rope of [twisted] fiber.",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
-      {
-        global_ayah_index: 6228,
-        surah_id: 112,
-        ayah_number: 1,
-        arabic: "قُلْ هُوَ اللَّهُ أَحَدٌ",
-        translation: "Say, \"He is Allah, [who is] One,",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
-      {
-        global_ayah_index: 6229,
-        surah_id: 112,
-        ayah_number: 2,
-        arabic: "اللَّهُ الصَّمَدُ",
-        translation: "Allah, the Eternal Refuge.",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
-      {
-        global_ayah_index: 6230,
-        surah_id: 112,
-        ayah_number: 3,
-        arabic: "لَمْ يَلِدْ وَلَمْ يُولَدْ",
-        translation: "He neither begets nor is born,",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
-      {
-        global_ayah_index: 6231,
-        surah_id: 112,
-        ayah_number: 4,
-        arabic: "وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ",
-        translation: "And there is none co-equal or comparable unto Him.\"",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      }
-    ]
-  },
-  602: {
-    page_number: 602,
-    juz_number: 30,
-    surah_on_page: [
       { surah_id: 109, name_arabic: "الكَافِرُون", name_english: "Al-Kafirun", is_surah_start: true },
-      { surah_id: 108, name_arabic: "الكَوْثَر", name_english: "Al-Kauthar", is_surah_start: true },
-      { surah_id: 107, name_arabic: "المَاعُون", name_english: "Al-Ma'un", is_surah_start: true }
+      { surah_id: 110, name_arabic: "النَّصْر", name_english: "An-Nasr", is_surah_start: true },
+      { surah_id: 111, name_arabic: "المَسَد", name_english: "Al-Masad", is_surah_start: true }
     ],
     ayahs: [
-      {
-        global_ayah_index: 6200,
-        surah_id: 107,
-        ayah_number: 1,
-        arabic: "أَرَأَيْتَ الَّذِي يُكَذِّبُ بِالدِّينِ",
-        translation: "Have you seen the one who denies the Recompense?",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
-      {
-        global_ayah_index: 6201,
-        surah_id: 107,
-        ayah_number: 2,
-        arabic: "فَذَٰلِكَ الَّذِي يَدُعُّ الْيَتِيمَ",
-        translation: "For that is the one who drives away the orphan",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
-      {
-        global_ayah_index: 6202,
-        surah_id: 107,
-        ayah_number: 3,
-        arabic: "وَلَا يَحُضُّ عَلَىٰ طَعَامِ الْمِسْكِينِ",
-        translation: "And does not encourage the feeding of the poor.",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
-      {
-        global_ayah_index: 6203,
-        surah_id: 107,
-        ayah_number: 4,
-        arabic: "فَوَيْلٌ لِّلْمُصَلِّينَ",
-        translation: "So woe to those who pray",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
-      {
-        global_ayah_index: 6204,
-        surah_id: 107,
-        ayah_number: 5,
-        arabic: "الَّذِينَ هُمْ عَن صَلَاتِهِمْ سَاهُونَ",
-        translation: "[But] who are heedless of their prayer -",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
-      {
-        global_ayah_index: 6205,
-        surah_id: 107,
-        ayah_number: 6,
-        arabic: "الَّذِينَ هُمْ يُرَاءُونَ",
-        translation: "Those who make show [of their deeds]",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
-      {
-        global_ayah_index: 6206,
-        surah_id: 107,
-        ayah_number: 7,
-        arabic: "وَيَمْنَعُونَ الْمَاعُونَ",
-        translation: "And withhold [simple] assistance.",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
-      {
-        global_ayah_index: 6207,
-        surah_id: 108,
-        ayah_number: 1,
-        arabic: "إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ",
-        translation: "Indeed, We have granted you, [O Muhammad], al-Kawthar.",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
-      {
-        global_ayah_index: 6208,
-        surah_id: 108,
-        ayah_number: 2,
-        arabic: "فَصَلِّ لِرَبِّكَ وَانْحَرْ",
-        translation: "So pray to your Lord and sacrifice [to Him alone].",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
-      {
-        global_ayah_index: 6209,
-        surah_id: 108,
-        ayah_number: 3,
-        arabic: "إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ",
-        translation: "Indeed, your enemy is the one cut off.",
-        juz: 30,
-        hizb: 60,
-        rub: 240,
-        sajda: false
-      },
       {
         global_ayah_index: 6210,
         surah_id: 109,
@@ -652,6 +444,259 @@ const detailed_pages: Record<number, Page> = {
         ayah_number: 6,
         arabic: "لَكُمْ دِينُكُمْ وَلِيَ دِينِ",
         translation: "For you is your religion, and for me is my religion.\"",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6216,
+        surah_id: 110,
+        ayah_number: 1,
+        arabic: "إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ",
+        translation: "When the victory of Allah has come and the conquest,",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6217,
+        surah_id: 110,
+        ayah_number: 2,
+        arabic: "وَرَأَيْتَ النَّاسَ يَدْخُلُونَ فِي دِينِ اللَّهِ أَفْوَاجًا",
+        translation: "And you see the people entering into the religion of Allah in multitudes,",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6218,
+        surah_id: 110,
+        ayah_number: 3,
+        arabic: "فَسَبِّحْ بِحَمْدِ رَبِّكَ وَاسْتَغْفِرْهُ ۚ إِنَّهُ كَانَ تَوَّابًا",
+        translation: "Then exalt [Him] with praise of your Lord and ask forgiveness of Him. Indeed, He is ever Accepting of repentance.",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6219,
+        surah_id: 111,
+        ayah_number: 1,
+        arabic: "تَبَّتْ يَدَا أَبِي لَهَبٍ وَتَبَّ",
+        translation: "May the hands of Abu Lahab be ruined, and ruined is he.",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6220,
+        surah_id: 111,
+        ayah_number: 2,
+        arabic: "مَا أَغْنَىٰ عَنْهُ مَالُهُ وَمَا كَسَبَ",
+        translation: "His wealth will not avail him or that which he gained.",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6121,
+        surah_id: 111,
+        ayah_number: 3,
+        arabic: "سَيَصْلَىٰ نَارًا ذَاتَ لَهَبٍ",
+        translation: "He will [enter to] burn in a Fire of [blazing] flame,",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6222,
+        surah_id: 111,
+        ayah_number: 4,
+        arabic: "وَامْرَأَتُهُ حَمَّالَةَ الْحَطَبِ",
+        translation: "And his wife [as well] - the carrier of firewood.",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6223,
+        surah_id: 111,
+        ayah_number: 5,
+        arabic: "فِي جِيدِهَا حَبْلٌ مِّن مَّسَدٍ",
+        translation: "Around her neck is a rope of [twisted] fiber.",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      }
+    ]
+  },
+  602: {
+    page_number: 602,
+    juz_number: 30,
+    surah_on_page: [
+      { surah_id: 106, name_arabic: "قُرَيْش", name_english: "Quraish", is_surah_start: true },
+      { surah_id: 107, name_arabic: "المَاعُون", name_english: "Al-Ma'un", is_surah_start: true },
+      { surah_id: 108, name_arabic: "الكَوْثَر", name_english: "Al-Kauthar", is_surah_start: true }
+    ],
+    ayahs: [
+      {
+        global_ayah_index: 6193,
+        surah_id: 106,
+        ayah_number: 1,
+        arabic: "لِإِيلَافِ قُرَيْشٍ",
+        translation: "For the accustomed security of Quraish -",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6194,
+        surah_id: 106,
+        ayah_number: 2,
+        arabic: "إِيلَافِهِمْ رِحْلَةَ الشِّتَاءِ وَالصَّيْفِ",
+        translation: "Their accustomed security [in] the caravan of winter and summer -",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6195,
+        surah_id: 106,
+        ayah_number: 3,
+        arabic: "فَلْيَعْبُدُوا رَبَّ هَٰذَا الْبَيْتِ",
+        translation: "Let them worship the Lord of this House,",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6196,
+        surah_id: 106,
+        ayah_number: 4,
+        arabic: "الَّذِي أَطْعَمَهُم مِّن جُوعٍ وَآمَنَهُم مِّنْ خَوْفٍ",
+        translation: "Who has fed them, [saving them] from hunger, and made them safe, [saving them] from fear.",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6197,
+        surah_id: 107,
+        ayah_number: 1,
+        arabic: "أَرَأَيْتَ الَّذِي يُكَذِّبُ بِالدِّينِ",
+        translation: "Have you seen the one who denies the Recompense?",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6198,
+        surah_id: 107,
+        ayah_number: 2,
+        arabic: "فَذَٰلِكَ الَّذِي يَدُعُّ الْيَتِيمَ",
+        translation: "For that is the one who drives away the orphan",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6199,
+        surah_id: 107,
+        ayah_number: 3,
+        arabic: "وَلَا يَحُضُّ عَلَىٰ طَعَامِ الْمِسْكِينِ",
+        translation: "And does not encourage the feeding of the poor.",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6200,
+        surah_id: 107,
+        ayah_number: 4,
+        arabic: "فَوَيْلٌ لِّلْمُصَلِّينَ",
+        translation: "So woe to those who pray",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6201,
+        surah_id: 107,
+        ayah_number: 5,
+        arabic: "الَّذِينَ هُمْ عَن صَلَاتِهِمْ سَاهُونَ",
+        translation: "[But] who are heedless of their prayer -",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6202,
+        surah_id: 107,
+        ayah_number: 6,
+        arabic: "الَّذِينَ هُمْ يُرَاءُونَ",
+        translation: "Those who make show [of their deeds]",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6203,
+        surah_id: 107,
+        ayah_number: 7,
+        arabic: "وَيَمْنَعُونَ الْمَاعُونَ",
+        translation: "And withhold [simple] assistance.",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6204,
+        surah_id: 108,
+        ayah_number: 1,
+        arabic: "إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ",
+        translation: "Indeed, We have granted you, [O Muhammad], al-Kawthar.",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6205,
+        surah_id: 108,
+        ayah_number: 2,
+        arabic: "فَصَلِّ لِرَبِّكَ وَانْحَرْ",
+        translation: "So pray to your Lord and sacrifice [to Him alone].",
+        juz: 30,
+        hizb: 60,
+        rub: 240,
+        sajda: false
+      },
+      {
+        global_ayah_index: 6206,
+        surah_id: 108,
+        ayah_number: 3,
+        arabic: "إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ",
+        translation: "Indeed, your enemy is the one cut off.",
         juz: 30,
         hizb: 60,
         rub: 240,

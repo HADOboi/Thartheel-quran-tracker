@@ -17,13 +17,20 @@ export default function App() {
   const checkStreakOnAppLoad = useQuranStore((state) => state.checkStreakOnAppLoad);
 
   // Active section inside the Sidebar
-  const [activeSection, setActiveSection] = useState<'recitation' | 'dashboard' | 'hifdh' | 'khatm' | 'settings'>(
-    'recitation'
-  );
+  const [activeSection, setActiveSection] = useState<'recitation' | 'dashboard' | 'hifdh' | 'khatm' | 'settings'>(() => {
+    const initMode = useQuranStore.getState().app_meta?.current_view_mode;
+    return initMode === 'hifdh' ? 'hifdh' : 'recitation';
+  });
 
-  // Audit streak calculations once upon app startup
+  // Audit streak calculations once upon app startup, and calibrate active sidebar section
   useEffect(() => {
     checkStreakOnAppLoad();
+    const persistedMode = useQuranStore.getState().app_meta?.current_view_mode;
+    if (persistedMode === 'hifdh') {
+      setActiveSection('hifdh');
+    } else {
+      setActiveSection('recitation');
+    }
   }, []);
 
   const currentSubTab = useQuranStore((state) => state.app_meta.current_sub_tab);
