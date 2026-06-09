@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useQuranStore } from '../../store/useQuranStore';
 import ReciteMap from './ReciteMap';
 import HifdhMap from './HifdhMap';
@@ -12,6 +13,17 @@ export default function MapCanvas({ onOpenReader }: MapCanvasProps) {
   const setTab = useQuranStore((state) => state.setSubTab);
   const currentActualPage = useQuranStore((state) => state.quran_recite_tracker.current_actual_page);
   const completedHistory = useQuranStore((state) => state.quran_recite_tracker.completed_pages_history);
+  const viewMode = useQuranStore((state) => state.app_meta.current_view_mode);
+
+  // Derive active tab selection purely from render-time credentials to eliminate asynchronous race conditions
+  let activeTabToRender = currentTab;
+  if (viewMode === 'recite') {
+    if (currentTab === 'surah') {
+      activeTabToRender = 'juz';
+    }
+  } else {
+    activeTabToRender = 'surah';
+  }
 
   return (
     <div className="flex-1 flex flex-col h-full bg-[#0a0a0a] relative overflow-hidden select-none">
@@ -23,40 +35,45 @@ export default function MapCanvas({ onOpenReader }: MapCanvasProps) {
       <header className="h-16 flex items-center justify-between px-10 border-b border-dark-border/40 bg-zinc-950/20 backdrop-blur-md z-40 relative">
         <div className="flex items-center space-x-8">
           <span className="text-sm font-display font-bold text-white uppercase tracking-wider select-none">
-            Map View
+            {viewMode === 'recite' ? 'Recitation Journey' : 'Memorization Map'}
           </span>
 
           <nav className="flex space-x-6">
-            <button
-              onClick={() => setTab('juz')}
-              className={`py-5 text-xs font-mono font-bold tracking-widest uppercase cursor-pointer border-b-2 transition-all duration-200 ${
-                currentTab === 'juz'
-                  ? 'border-neon-green text-neon-green font-extrabold'
-                  : 'border-transparent text-dark-muted hover:text-white'
-              }`}
-            >
-              Juz View
-            </button>
-            <button
-              onClick={() => setTab('surah')}
-              className={`py-5 text-xs font-mono font-bold tracking-widest uppercase cursor-pointer border-b-2 transition-all duration-200 ${
-                currentTab === 'surah'
-                  ? 'border-neon-green text-neon-green font-extrabold'
-                  : 'border-transparent text-dark-muted hover:text-white'
-              }`}
-            >
-              Surah View
-            </button>
-            <button
-              onClick={() => setTab('map')}
-              className={`py-5 text-xs font-mono font-bold tracking-widest uppercase cursor-pointer border-b-2 transition-all duration-200 ${
-                currentTab === 'map'
-                  ? 'border-neon-green text-neon-green font-extrabold'
-                  : 'border-transparent text-dark-muted hover:text-white'
-              }`}
-            >
-              Interactive Map
-            </button>
+            {viewMode === 'recite' ? (
+              <>
+                <button
+                  onClick={() => setTab('juz')}
+                  className={`py-5 text-xs font-mono font-bold tracking-widest uppercase cursor-pointer border-b-2 transition-all duration-200 ${
+                    activeTabToRender === 'juz'
+                      ? 'border-neon-green text-neon-green font-extrabold'
+                      : 'border-transparent text-dark-muted hover:text-white'
+                  }`}
+                >
+                  Juz View
+                </button>
+                <button
+                  onClick={() => setTab('map')}
+                  className={`py-5 text-xs font-mono font-bold tracking-widest uppercase cursor-pointer border-b-2 transition-all duration-200 ${
+                    activeTabToRender === 'map'
+                      ? 'border-neon-green text-neon-green font-extrabold'
+                      : 'border-transparent text-dark-muted hover:text-white'
+                  }`}
+                >
+                  Interactive Map
+                </button>
+              </>
+            ) : (
+              <button
+                onClick={() => setTab('surah')}
+                className={`py-5 text-xs font-mono font-bold tracking-widest uppercase cursor-pointer border-b-2 transition-all duration-200 ${
+                  activeTabToRender === 'surah'
+                    ? 'border-neon-green text-neon-green font-extrabold'
+                    : 'border-transparent text-dark-muted hover:text-white'
+                }`}
+              >
+                Surah View (Memorization)
+              </button>
+            )}
           </nav>
         </div>
 
@@ -78,19 +95,19 @@ export default function MapCanvas({ onOpenReader }: MapCanvasProps) {
         
         {/* Render Tab panels based on active selections */}
         <div className="max-w-[1000px] mx-auto select-none">
-          {currentTab === 'juz' && (
+          {activeTabToRender === 'juz' && (
             <div className="animate-fadeIn">
               <ReciteMap onOpenReader={onOpenReader} />
             </div>
           )}
 
-          {currentTab === 'surah' && (
+          {activeTabToRender === 'surah' && (
             <div className="animate-fadeIn">
               <HifdhMap />
             </div>
           )}
 
-          {currentTab === 'map' && (
+          {activeTabToRender === 'map' && (
             <div className="animate-fadeIn space-y-6 select-none select-none relative">
               <div className="p-5 border border-dark-border bg-dark-surface/40 rounded-2xl relative overflow-hidden backdrop-blur-sm shadow-xl">
                 

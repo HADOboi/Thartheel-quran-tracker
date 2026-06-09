@@ -26,63 +26,84 @@ export default function App() {
     checkStreakOnAppLoad();
   }, []);
 
-  // Sync state selectors when active sidebar panel gets changed
-  useEffect(() => {
-    if (activeSection === 'recitation') {
-      setSubTab('juz');
+  const currentSubTab = useQuranStore((state) => state.app_meta.current_sub_tab);
+
+  // Clean, robust unified selection handler that gets triggered when clicking the sidebar links
+  const handleNavigateSection = (sec: 'recitation' | 'dashboard' | 'hifdh' | 'khatm' | 'settings') => {
+    // Reset reading page first to exit overlay if swapping sidebar tabs
+    if (activeReadingPage !== null) {
+      useQuranStore.getState().closeReader();
+    }
+    setActiveSection(sec);
+    
+    // Explicitly update store states on click to avoid complex bidirectional useEffect triggers
+    if (sec === 'recitation') {
       if (currentViewMode !== 'recite') {
         toggleViewMode();
       }
-    } else if (activeSection === 'hifdh') {
-      setSubTab('surah');
+      if (currentSubTab !== 'juz' && currentSubTab !== 'map') {
+        setSubTab('juz');
+      }
+    } else if (sec === 'hifdh') {
       if (currentViewMode !== 'hifdh') {
         toggleViewMode();
       }
+      if (currentSubTab !== 'surah') {
+        setSubTab('surah');
+      }
     }
-  }, [activeSection]);
+  };
 
-  const currentSubTab = useQuranStore((state) => state.app_meta.current_sub_tab);
-
-  // Sync back sidebar when sub tab is clicked inside the MapCanvas
+  // Safe, one-way alignment when the reading layout is closed
   useEffect(() => {
-    if (currentSubTab === 'juz') {
-      setActiveSection('recitation');
-    } else if (currentSubTab === 'surah') {
-      setActiveSection('hifdh');
+    if (activeReadingPage === null) {
+      if (activeSection === 'recitation') {
+        if (currentViewMode !== 'recite') {
+          toggleViewMode();
+        }
+        if (currentSubTab !== 'juz' && currentSubTab !== 'map') {
+          setSubTab('juz');
+        }
+      } else if (activeSection === 'hifdh') {
+        if (currentViewMode !== 'hifdh') {
+          toggleViewMode();
+        }
+        if (currentSubTab !== 'surah') {
+          setSubTab('surah');
+        }
+      }
     }
-  }, [currentSubTab]);
+    // We intentionally do NOT include currentViewMode or currentSubTab here to prevent loop recursion
+  }, [activeReadingPage, activeSection]);
 
-  // Global Tab Key listener to toggle Recite vs Hifdh mode
+  // Global Tab Key listener to toggle Recite vs Hifdh mode cleanly
   useEffect(() => {
     const handleTabKey = (e: KeyboardEvent) => {
       if (e.key === 'Tab') {
         e.preventDefault();
+        
+        const nextMode = currentViewMode === 'recite' ? 'hifdh' : 'recite';
         toggleViewMode();
         
-        // Align active sidebar menu item to match mode swap
-        setActiveSection((prev) => {
-          if (prev === 'recitation') return 'hifdh';
-          if (prev === 'hifdh') return 'recitation';
-          return prev;
-        });
+        if (nextMode === 'recite') {
+          setActiveSection('recitation');
+          setSubTab('juz');
+        } else {
+          setActiveSection('hifdh');
+          setSubTab('surah');
+        }
       }
     };
     window.addEventListener('keydown', handleTabKey);
     return () => window.removeEventListener('keydown', handleTabKey);
-  }, [toggleViewMode]);
+  }, [currentViewMode, toggleViewMode, setSubTab]);
 
   return (
     <div className="flex w-screen h-screen overflow-hidden bg-[#0a0a0a] text-[#e5e2e1] select-none font-sans antialiased">
       {/* 1. Left Sidebar Navigation */}
       <Sidebar 
         activeSection={activeSection} 
-        setActiveSection={(sec) => {
-          // Reset reading page first to exit overlay if swapping sidebar tabs
-          if (activeReadingPage !== null) {
-            useQuranStore.getState().closeReader();
-          }
-          setActiveSection(sec);
-        }} 
+        setActiveSection={handleNavigateSection} 
       />
 
       {/* 2. Fluid Right Panel Area */}

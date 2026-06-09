@@ -18,11 +18,17 @@ export default function ReciteMap({ onOpenReader }: ReciteMapProps) {
 
   // Auto-expand the Juz containing the active page on load
   useEffect(() => {
-    if (activeJuz) {
-      setExpandedJuzs((prev) => ({
-        ...prev,
-        [activeJuz.juz_number]: true,
-      }));
+    if (activeJuz && activeJuz.juz_number) {
+      const targetJuz = activeJuz.juz_number;
+      setExpandedJuzs((prev) => {
+        if (prev[targetJuz]) {
+          return prev; // Return exact same state reference to avoid re-rendering loop
+        }
+        return {
+          ...prev,
+          [targetJuz]: true,
+        };
+      });
     }
   }, [activeJuz?.juz_number]);
 
