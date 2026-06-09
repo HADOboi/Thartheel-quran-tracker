@@ -26,29 +26,36 @@ export default function Sidebar({ activeSection, setActiveSection }: SidebarProp
   const today = getCurrentDateString();
   const isCompletedToday = lastReadDate === today;
 
-  // Let's calculate overall progress %
+    // Let's calculate overall progress %
   const progressPercent = ((totalCompleted / 604) * 100).toFixed(1);
 
-  // Generate the last 7 days of the week to display progression
+  // Generate the current week days (starting Monday) to display progression
   const getPastSevenDays = () => {
     const days = [];
-    const dateLabels = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+    const dateLabels = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
     const completedHistory = useQuranStore.getState().quran_recite_tracker.completed_pages_history;
 
-    for (let i = 6; i >= 0; i--) {
-      const d = new Date();
-      d.setDate(d.getDate() - i);
+    const todayDate = new Date();
+    const todayDayOfWeek = todayDate.getDay(); // 0 is Sunday, 1 is Monday ... 6 is Saturday
+    
+    // Calculate distance to current week's Monday
+    const daysToMonday = todayDayOfWeek === 0 ? 6 : todayDayOfWeek - 1;
+    
+    const mondayDate = new Date(todayDate);
+    mondayDate.setDate(todayDate.getDate() - daysToMonday);
+
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(mondayDate);
+      d.setDate(mondayDate.getDate() + i);
       
       const year = d.getFullYear();
       const month = String(d.getMonth() + 1).padStart(2, '0');
       const day = String(d.getDate()).padStart(2, '0');
       const dateStr = `${year}-${month}-${day}`;
       
-      const dayOfWeekIndex = d.getDay();
-      const label = dateLabels[dayOfWeekIndex];
-      
+      const label = dateLabels[i];
       const isDone = completedHistory.some((h) => h.date === dateStr);
-      const isToday = i === 0;
+      const isToday = d.toDateString() === todayDate.toDateString();
 
       days.push({ label, isDone, isToday, dateStr });
     }
